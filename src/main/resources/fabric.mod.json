@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "screenshot2webhook",
+	"version": "${version}",
+	"name": "Screenshot2Webhook",
+	"description": "Share your screenshots in discord via the power of webhooks",
+	"authors": [
+		"cputnam-a11y"
+	],
+	"contact": {
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/screenshot2webhook/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"io.github.cputnama11y.screenshot2webhook.client.Screenshot2WebhookClient"
+		]
+	},
+	"mixins": [
+		{
+			"config": "screenshot2webhook.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.2",
+		"minecraft": "~26.1.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}

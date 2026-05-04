@@ -8,7 +8,9 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommands;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.minecraft.network.chat.Component;
+import org.apache.commons.compress.archivers.sevenz.CLI;
 
 import java.io.IOException;
 import java.net.URI;
@@ -81,6 +83,7 @@ public class Screenshot2WebhookClient implements ClientModInitializer {
                                                         CLIENT.sendAsync(
                                                                 HttpRequest.newBuilder()
                                                                         .header("Content-Type", built.contentType())
+                                                                        .header("User-Agent", "DiscordBot (https://github.com/cputnam-a11y/screenshot2webhook/, 1.0.0)")
                                                                         .uri(URI.create(config.discordWebhookUrl()))
                                                                         .POST(
                                                                                 HttpRequest.BodyPublishers.ofByteArray(built.bytes())
@@ -112,6 +115,8 @@ public class Screenshot2WebhookClient implements ClientModInitializer {
         } catch (Exception e) {
             // hmm yes, error handling...
         }
+
+        ClientLifecycleEvents.CLIENT_STOPPING.register(_ -> CLIENT.close());
     }
 
     static JsonObject obj(Consumer<JsonObject> init) {

@@ -8,7 +8,7 @@
 		"cputnam-a11y"
 	],
 	"contact": {
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/cputnam-a11y/screenshot2webhook/"
 	},
 	"license": "MIT",
 	"icon": "assets/screenshot2webhook/icon.png",

@@ -10,7 +10,6 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallba
 import net.fabricmc.fabric.api.client.command.v2.ClientCommands;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.minecraft.network.chat.Component;
-import org.apache.commons.compress.archivers.sevenz.CLI;
 
 import java.io.IOException;
 import java.net.URI;

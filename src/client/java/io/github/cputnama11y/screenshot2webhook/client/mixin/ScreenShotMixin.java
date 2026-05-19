@@ -6,6 +6,7 @@ import net.minecraft.client.Screenshot;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Unit;
+import net.minecraft.util.Util;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -50,6 +51,10 @@ public class ScreenShotMixin {
     )
     private static void onGrab(CallbackInfo ci, @Local(argsOnly = true) File file, @Local(argsOnly = true) Consumer<Component> sender) {
         if (!IS_SCREENSHOT.isBound()) return;
-        sender.accept(Component.empty().append(Component.literal("[Click Here]").withStyle(ChatFormatting.UNDERLINE).withStyle(s -> s.withClickEvent(new ClickEvent.RunCommand("screenshot2webbhook send2webhook \"" + file.toPath() + "\"")))).append(" to upload this screenshot to discord"));
+        var filePath = Util.getPlatform().equals(Util.OS.WINDOWS)
+                       ? file.toPath().toString().replace("\\", "/")
+                       : file.toPath().toString();
+
+        sender.accept(Component.empty().append(Component.literal("[Click Here]").withStyle(ChatFormatting.UNDERLINE).withStyle(s -> s.withClickEvent(new ClickEvent.RunCommand("screenshot2webbhook send2webhook \"" + filePath + "\"")))).append(" to upload this screenshot to discord"));
     }
 }
